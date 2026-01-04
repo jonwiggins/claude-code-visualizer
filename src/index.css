@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+
+  --color-terminal-bg: #0d1117;
+  --color-terminal-surface: #161b22;
+  --color-terminal-border: #30363d;
+  --color-terminal-fg: #c9d1d9;
+  --color-terminal-muted: #8b949e;
+
+  --color-node-active: #238636;
+  --color-node-pending: #1f6feb;
+  --color-node-error: #f85149;
+  --color-node-warning: #d29922;
+  --color-node-hook: #a371f7;
+  --color-node-subagent: #58a6ff;
+
+  --color-accent: #58a6ff;
+  --color-accent-hover: #79c0ff;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-mono);
+  background-color: var(--color-terminal-bg);
+  color: var(--color-terminal-fg);
+}
+
+/* React Flow customization */
+.react-flow__node {
+  font-family: var(--font-mono);
+}
+
+.react-flow__attribution {
+  display: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-terminal-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-terminal-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-terminal-muted);
+}
+
+/* Node animations */
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(35, 134, 54, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(35, 134, 54, 0); }
+}
+
+@keyframes flow {
+  0% { stroke-dashoffset: 24; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.node-active {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.edge-animated {
+  stroke-dasharray: 8;
+  animation: flow 0.5s linear infinite;
+}
