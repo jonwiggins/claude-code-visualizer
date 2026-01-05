@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Terminal, Cpu, Shield, Zap, Users, Database, FileCode, BookOpen } from 'lucide-react';
+import { Terminal, Cpu, Shield, Zap, Users, Database, FileCode, BookOpen, Clock, CheckCircle } from 'lucide-react';
 import { CodeBlock } from '../components/CodeBlock';
 import clsx from 'clsx';
 
@@ -13,7 +13,9 @@ const sections = [
   { id: 'permission-system', title: 'Permission System', icon: Shield },
   { id: 'hooks', title: 'Hooks System', icon: Zap },
   { id: 'subagents', title: 'Subagents', icon: Users },
+  { id: 'background-tasks', title: 'Background Tasks', icon: Clock },
   { id: 'context-compaction', title: 'Context Compaction', icon: Database },
+  { id: 'conclusion', title: 'Conclusion', icon: CheckCircle },
 ];
 
 // Simple diagram component
@@ -60,9 +62,12 @@ export function LearnPage() {
 
   // Track which section is currently visible using Intersection Observer
   useEffect(() => {
+    const mainElement = mainRef.current;
+    if (!mainElement) return;
+
     const observerOptions = {
-      root: mainRef.current,
-      rootMargin: '-20% 0px -70% 0px', // Trigger when section is in upper portion of viewport
+      root: mainElement,
+      rootMargin: '-10% 0px -60% 0px', // Trigger when section is in upper portion of viewport
       threshold: 0,
     };
 
@@ -84,7 +89,35 @@ export function LearnPage() {
       }
     });
 
-    return () => observer.disconnect();
+    // Also handle scroll to bottom case for last sections
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = mainElement;
+      const isNearBottom = scrollTop + clientHeight >= scrollHeight - 150;
+
+      if (isNearBottom) {
+        // When near bottom, find which section is most visible
+        const mainRect = mainElement.getBoundingClientRect();
+        const targetY = mainRect.top + mainRect.height * 0.3; // Check 30% from top
+
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const element = document.getElementById(sections[i].id);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            if (rect.top <= targetY) {
+              setActiveSection(sections[i].id);
+              break;
+            }
+          }
+        }
+      }
+    };
+
+    mainElement.addEventListener('scroll', handleScroll);
+
+    return () => {
+      observer.disconnect();
+      mainElement.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -884,6 +917,111 @@ const continued = await tools.Task({
             </Callout>
           </section>
 
+          {/* Background Tasks */}
+          <section id="background-tasks" className="mb-20">
+            <h2 className="text-3xl font-bold mb-8 flex items-center gap-3 text-[#e6edf3]">
+              <Clock size={24} className="text-indigo-500" />
+              Background Tasks
+            </h2>
+
+            <p className="text-[#8b949e] leading-relaxed mb-6">
+              Claude Code can run long-running operations in the background, allowing you to continue
+              working while tasks complete. This includes shell commands, subagents, and other async operations.
+            </p>
+
+            <h3 className="text-xl font-semibold mt-10 mb-4 text-[#e6edf3]">Background Shell Commands</h3>
+
+            <p className="text-[#8b949e] leading-relaxed mb-6">
+              When Claude runs a Bash command with <code className="bg-[#30363d] px-1.5 py-0.5 rounded text-sm">run_in_background: true</code>,
+              the command executes asynchronously. Claude can continue working and check on the task later.
+            </p>
+
+            <CodeBlock
+              language="typescript"
+              code={`// Running a command in the background
+const result = await tools.Bash({
+  command: "npm run build",
+  run_in_background: true
+});
+
+// Returns immediately with a task ID
+{
+  taskId: "bbc9855",
+  status: "running"
+}
+
+// Later, check on the task
+const output = await tools.TaskOutput({
+  task_id: "bbc9855",
+  block: false  // Don't wait, just check status
+});
+
+// Or wait for completion
+const finalOutput = await tools.TaskOutput({
+  task_id: "bbc9855",
+  block: true,
+  timeout: 60000  // Wait up to 60 seconds
+});`}
+            />
+
+            <h3 className="text-xl font-semibold mt-10 mb-4 text-[#e6edf3]">Background Subagents</h3>
+
+            <p className="text-[#8b949e] leading-relaxed mb-6">
+              Subagents can also run in the background, enabling parallel work streams:
+            </p>
+
+            <CodeBlock
+              language="typescript"
+              code={`// Launch multiple agents in parallel
+const agent1 = await tools.Task({
+  subagent_type: 'Explore',
+  prompt: 'Find all API endpoints',
+  run_in_background: true
+});
+
+const agent2 = await tools.Task({
+  subagent_type: 'Explore',
+  prompt: 'Find all database models',
+  run_in_background: true
+});
+
+// Continue with other work...
+
+// Later, collect results
+const results1 = await tools.TaskOutput({ task_id: agent1.taskId });
+const results2 = await tools.TaskOutput({ task_id: agent2.taskId });`}
+            />
+
+            <h3 className="text-xl font-semibold mt-10 mb-4 text-[#e6edf3]">Task Management</h3>
+
+            <p className="text-[#8b949e] leading-relaxed mb-6">
+              You can manage background tasks using the <code className="bg-[#30363d] px-1.5 py-0.5 rounded text-sm">/tasks</code> command
+              to see running tasks, or use the <code className="bg-[#30363d] px-1.5 py-0.5 rounded text-sm">KillShell</code> tool
+              to terminate a background shell:
+            </p>
+
+            <CodeBlock
+              language="typescript"
+              code={`// Kill a background shell
+await tools.KillShell({
+  shell_id: "bbc9855"
+});
+
+// TaskOutput tool parameters
+interface TaskOutputParams {
+  task_id: string;     // The task ID to check
+  block?: boolean;     // Wait for completion (default: true)
+  timeout?: number;    // Max wait time in ms (default: 30000)
+}`}
+            />
+
+            <Callout type="tip" title="Parallel Execution">
+              Running tasks in the background is especially useful for long-running operations like
+              builds, tests, or comprehensive codebase searches. Claude can work on other things
+              while waiting for results.
+            </Callout>
+          </section>
+
           {/* Context Compaction */}
           <section id="context-compaction" className="mb-20">
             <h2 className="text-3xl font-bold mb-8 flex items-center gap-3 text-[#e6edf3]">
@@ -1030,7 +1168,7 @@ async function handleUserMessage(message: string) {
           </section>
 
           {/* Conclusion */}
-          <section className="mb-20">
+          <section id="conclusion" className="mb-20">
             <h2 className="text-3xl font-bold mb-8 text-[#e6edf3]">Conclusion</h2>
 
             <p className="text-[#8b949e] leading-relaxed mb-6">

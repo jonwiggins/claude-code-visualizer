@@ -19,20 +19,6 @@ function App() {
             {/* Navigation Tabs */}
             <nav className="flex items-center gap-1">
               <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  clsx(
-                    'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors',
-                    isActive
-                      ? 'bg-[#1f6feb]/20 text-[#58a6ff]'
-                      : 'text-[#8b949e] hover:text-[#c9d1d9] hover:bg-[#1f2428]'
-                  )
-                }
-              >
-                <Play size={16} />
-                Visualizer
-              </NavLink>
-              <NavLink
                 to="/learn"
                 className={({ isActive }) =>
                   clsx(
@@ -45,6 +31,20 @@ function App() {
               >
                 <BookOpen size={16} />
                 Learn
+              </NavLink>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  clsx(
+                    'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+                    isActive
+                      ? 'bg-[#1f6feb]/20 text-[#58a6ff]'
+                      : 'text-[#8b949e] hover:text-[#c9d1d9] hover:bg-[#1f2428]'
+                  )
+                }
+              >
+                <Play size={16} />
+                Visualizer
               </NavLink>
             </nav>
           </div>
