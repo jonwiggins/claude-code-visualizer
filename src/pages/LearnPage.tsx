@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { ChevronRight, Terminal, Cpu, Shield, Zap, Users, Database, FileCode, BookOpen } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Terminal, Cpu, Shield, Zap, Users, Database, FileCode, BookOpen } from 'lucide-react';
 import { CodeBlock } from '../components/CodeBlock';
 import clsx from 'clsx';
 
@@ -56,6 +56,36 @@ function Callout({ type, title, children }: { type: 'info' | 'warning' | 'tip'; 
 
 export function LearnPage() {
   const [activeSection, setActiveSection] = useState('introduction');
+  const mainRef = useRef<HTMLElement>(null);
+
+  // Track which section is currently visible using Intersection Observer
+  useEffect(() => {
+    const observerOptions = {
+      root: mainRef.current,
+      rootMargin: '-20% 0px -70% 0px', // Trigger when section is in upper portion of viewport
+      threshold: 0,
+    };
+
+    const observerCallback: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe all section elements
+    sections.forEach((section) => {
+      const element = document.getElementById(section.id);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const scrollToSection = (id: string) => {
     setActiveSection(id);
@@ -94,7 +124,7 @@ export function LearnPage() {
       </aside>
 
       {/* Main content - Article */}
-      <main className="flex-1 overflow-auto bg-[#010409]">
+      <main ref={mainRef} className="flex-1 overflow-auto bg-[#010409]">
         <div className="max-w-3xl mx-auto px-16 py-20">
           <article className="space-y-6">
           {/* Introduction */}
