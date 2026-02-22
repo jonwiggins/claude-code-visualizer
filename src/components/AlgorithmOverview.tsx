@@ -28,7 +28,7 @@ function OverviewFlowNode({
   data,
   selected,
 }: {
-  data: Record<string, unknown>;
+  data: { label: string; category: string; [key: string]: unknown };
   selected: boolean;
 }) {
   const colorClass =
