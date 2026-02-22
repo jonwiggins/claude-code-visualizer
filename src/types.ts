@@ -54,7 +54,14 @@ export interface PermissionRule {
 
 export interface HookConfig {
   id: string;
-  event: 'SessionStart' | 'UserPromptSubmit' | 'PreToolUse' | 'PostToolUse' | 'PreCompact' | 'Stop' | 'SubagentStop';
+  event:
+    | 'SessionStart'
+    | 'UserPromptSubmit'
+    | 'PreToolUse'
+    | 'PostToolUse'
+    | 'PreCompact'
+    | 'Stop'
+    | 'SubagentStop';
   command: string;
   enabled: boolean;
   behavior: 'allow' | 'deny' | 'modify' | 'block';

@@ -9,7 +9,12 @@ import {
 } from '@xyflow/react';
 import Dagre from '@dagrejs/dagre';
 import '@xyflow/react/dist/style.css';
-import { overviewNodes, overviewEdges, categoryColors, type OverviewNode } from '../algorithmOverview';
+import {
+  overviewNodes,
+  overviewEdges,
+  categoryColors,
+  type OverviewNode,
+} from '../algorithmOverview';
 import { CodeBlock } from './CodeBlock';
 import { BookOpen, X } from 'lucide-react';
 import clsx from 'clsx';
@@ -19,8 +24,15 @@ const NODE_WIDTH = 160;
 const NODE_HEIGHT = 50;
 
 // Custom node component for overview
-function OverviewFlowNode({ data, selected }: { data: Record<string, unknown>; selected: boolean }) {
-  const colorClass = categoryColors[data.category as OverviewNode['category']] || 'border-gray-500 bg-gray-500/10';
+function OverviewFlowNode({
+  data,
+  selected,
+}: {
+  data: Record<string, unknown>;
+  selected: boolean;
+}) {
+  const colorClass =
+    categoryColors[data.category as OverviewNode['category']] || 'border-gray-500 bg-gray-500/10';
 
   return (
     <div
@@ -28,7 +40,7 @@ function OverviewFlowNode({ data, selected }: { data: Record<string, unknown>; s
         'px-3 py-2 rounded-lg border-2 text-center transition-all duration-200 cursor-pointer',
         colorClass,
         selected && 'ring-2 ring-[#58a6ff] ring-offset-2 ring-offset-[#0d1117]',
-        !selected && 'hover:ring-1 hover:ring-[#58a6ff]/50'
+        !selected && 'hover:ring-1 hover:ring-[#58a6ff]/50',
       )}
       style={{ minWidth: NODE_WIDTH, maxWidth: NODE_WIDTH }}
     >
@@ -139,12 +151,7 @@ export function AlgorithmOverview() {
           }}
           proOptions={{ hideAttribution: true }}
         >
-          <Background
-            variant={BackgroundVariant.Dots}
-            gap={16}
-            size={1}
-            color="#30363d"
-          />
+          <Background variant={BackgroundVariant.Dots} gap={16} size={1} color="#30363d" />
           <Controls
             showInteractive={false}
             className="!bg-[#161b22] !border-[#30363d] !rounded [&>button]:!bg-[#161b22] [&>button]:!border-[#30363d] [&>button]:!text-[#c9d1d9] [&>button]:!w-6 [&>button]:!h-6 [&>button:hover]:!bg-[#30363d]"
@@ -167,7 +174,7 @@ export function AlgorithmOverview() {
                     selectedNode.category === 'tool' && 'bg-orange-500/20 text-orange-400',
                     selectedNode.category === 'hook' && 'bg-purple-500/20 text-purple-400',
                     selectedNode.category === 'subagent' && 'bg-cyan-500/20 text-cyan-400',
-                    selectedNode.category === 'output' && 'bg-emerald-500/20 text-emerald-400'
+                    selectedNode.category === 'output' && 'bg-emerald-500/20 text-emerald-400',
                   )}
                 >
                   {selectedNode.category}
@@ -199,9 +206,7 @@ export function AlgorithmOverview() {
             )}
           </div>
         ) : (
-          <div className="p-4 text-center text-sm text-[#8b949e]">
-            Click a node to see details
-          </div>
+          <div className="p-4 text-center text-sm text-[#8b949e]">Click a node to see details</div>
         )}
       </div>
 
@@ -219,7 +224,7 @@ export function AlgorithmOverview() {
             <div
               className={clsx(
                 'w-2 h-2 rounded-sm border',
-                categoryColors[category as OverviewNode['category']]
+                categoryColors[category as OverviewNode['category']],
               )}
             />
             <span className="text-[10px] text-[#8b949e]">{label}</span>

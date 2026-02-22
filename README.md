@@ -7,23 +7,27 @@ An interactive educational webapp that visualizes how [Claude Code](https://gith
 ## Features
 
 ### Interactive Visualizer
+
 - **Scenario-based learning**: Walk through real-world scenarios like file reads, multi-tool tasks, permission denials, and subagent delegation
 - **Step-by-step playback**: Use playback controls to step forward/backward through each execution step
 - **Live flowchart**: Watch the algorithm flow animate as you step through scenarios
 - **Detailed inspection**: Click any node to see payload data, tool inputs/outputs, and hook configurations
 
 ### Algorithm Overview
+
 - **Complete reference diagram**: See the entire Claude Code algorithm as an interactive flowchart
 - **20 algorithm nodes** covering session lifecycle, context management, agentic loop, tool execution, hooks, subagents, and output
 - **Click for details**: Each node shows detailed explanations and code examples
 
 ### Comprehensive Documentation
+
 - **Learn tab**: ~15 minute read covering all aspects of the algorithm
 - **ASCII diagrams**: Visual explanations of data flow
 - **Pseudocode**: Understand the logic without implementation details
 - **Real code examples**: JSON configurations and TypeScript snippets
 
 ### Sandbox Configuration
+
 - **Permission modes**: Toggle between default, acceptEdits, plan, and more
 - **Permission rules**: See how deny/ask/allow rules affect execution
 - **Hook configuration**: Understand how hooks intercept and modify behavior

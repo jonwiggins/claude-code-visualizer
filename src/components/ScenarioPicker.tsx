@@ -1,5 +1,15 @@
 import { useVisualizerStore } from '../store';
-import { Play, FileText, Users, Shield, Zap, Database, ChevronRight, Terminal, BookOpen } from 'lucide-react';
+import {
+  Play,
+  FileText,
+  Users,
+  Shield,
+  Zap,
+  Database,
+  ChevronRight,
+  Terminal,
+  BookOpen,
+} from 'lucide-react';
 import clsx from 'clsx';
 
 const scenarioIcons: Record<string, React.ElementType> = {
@@ -34,24 +44,24 @@ export function ScenarioPicker() {
               onClick={() => selectScenario(scenario.id)}
               className={clsx(
                 'w-full px-3 py-2 text-left border-b border-[#30363d] last:border-0 transition-colors flex items-center gap-2',
-                isSelected
-                  ? 'bg-[#1f6feb]/20 border-l-2 border-l-[#58a6ff]'
-                  : 'hover:bg-[#1f2428]',
+                isSelected ? 'bg-[#1f6feb]/20 border-l-2 border-l-[#58a6ff]' : 'hover:bg-[#1f2428]',
                 isOverview && !isSelected && 'bg-[#238636]/10',
-                isOverview && index === 0 && 'border-b-2 border-b-[#30363d]'
+                isOverview && index === 0 && 'border-b-2 border-b-[#30363d]',
               )}
             >
               <Icon
                 size={14}
                 className={clsx(
                   'flex-shrink-0',
-                  isSelected ? 'text-[#58a6ff]' : isOverview ? 'text-[#3fb950]' : 'text-[#8b949e]'
+                  isSelected ? 'text-[#58a6ff]' : isOverview ? 'text-[#3fb950]' : 'text-[#8b949e]',
                 )}
               />
-              <span className={clsx(
-                'text-sm font-medium flex-1 truncate',
-                isOverview && !isSelected && 'text-[#3fb950]'
-              )}>
+              <span
+                className={clsx(
+                  'text-sm font-medium flex-1 truncate',
+                  isOverview && !isSelected && 'text-[#3fb950]',
+                )}
+              >
                 {scenario.name}
               </span>
               {isOverview && !isSelected && (
@@ -59,9 +69,7 @@ export function ScenarioPicker() {
                   Start
                 </span>
               )}
-              {isSelected && (
-                <ChevronRight size={14} className="text-[#58a6ff] flex-shrink-0" />
-              )}
+              {isSelected && <ChevronRight size={14} className="text-[#58a6ff] flex-shrink-0" />}
             </button>
           );
         })}
@@ -72,9 +80,7 @@ export function ScenarioPicker() {
         <div className="p-3 space-y-3">
           <div>
             <h4 className="text-xs text-[#8b949e] uppercase tracking-wide mb-1">Description</h4>
-            <p className="text-sm text-[#c9d1d9] leading-relaxed">
-              {currentScenario.description}
-            </p>
+            <p className="text-sm text-[#c9d1d9] leading-relaxed">{currentScenario.description}</p>
           </div>
 
           {currentScenario.id !== 'algorithm-overview' && (
@@ -94,13 +100,16 @@ export function ScenarioPicker() {
               {currentScenario.id === 'algorithm-overview' ? 'Components' : 'Steps'}
             </h4>
             <p className="text-sm text-[#c9d1d9]">
-              {currentScenario.steps.length} {currentScenario.id === 'algorithm-overview' ? 'algorithm nodes' : 'execution steps'}
+              {currentScenario.steps.length}{' '}
+              {currentScenario.id === 'algorithm-overview' ? 'algorithm nodes' : 'execution steps'}
             </p>
           </div>
 
           {currentScenario.sandboxOverrides && (
             <div>
-              <h4 className="text-xs text-[#8b949e] uppercase tracking-wide mb-1">Sandbox Overrides</h4>
+              <h4 className="text-xs text-[#8b949e] uppercase tracking-wide mb-1">
+                Sandbox Overrides
+              </h4>
               <div className="text-xs text-[#f0883e] bg-[#f0883e]/10 rounded px-2 py-1">
                 This scenario modifies sandbox settings
               </div>

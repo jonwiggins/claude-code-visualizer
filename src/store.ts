@@ -221,7 +221,7 @@ export const useVisualizerStore = create<VisualizerState>((set, get) => ({
       sandbox: {
         ...state.sandbox,
         permissionRules: state.sandbox.permissionRules.map((r) =>
-          r.id === id ? { ...r, enabled: !r.enabled } : r
+          r.id === id ? { ...r, enabled: !r.enabled } : r,
         ),
       },
     })),
@@ -246,9 +246,7 @@ export const useVisualizerStore = create<VisualizerState>((set, get) => ({
     set((state) => ({
       sandbox: {
         ...state.sandbox,
-        hooks: state.sandbox.hooks.map((h) =>
-          h.id === id ? { ...h, enabled: !h.enabled } : h
-        ),
+        hooks: state.sandbox.hooks.map((h) => (h.id === id ? { ...h, enabled: !h.enabled } : h)),
       },
     })),
 
@@ -256,9 +254,7 @@ export const useVisualizerStore = create<VisualizerState>((set, get) => ({
     set((state) => ({
       sandbox: {
         ...state.sandbox,
-        hooks: state.sandbox.hooks.map((h) =>
-          h.id === id ? { ...h, behavior } : h
-        ),
+        hooks: state.sandbox.hooks.map((h) => (h.id === id ? { ...h, behavior } : h)),
       },
     })),
 

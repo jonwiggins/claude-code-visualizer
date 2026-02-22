@@ -19,7 +19,8 @@ export const scenarios: Scenario[] = [
   {
     id: 'algorithm-overview',
     name: 'Algorithm Overview',
-    description: 'Complete reference of the Claude Code algorithm showing all major components: session lifecycle, context management, agentic loop, tool execution, hooks, subagents, and output. Click on any node to see detailed explanations and code examples.',
+    description:
+      'Complete reference of the Claude Code algorithm showing all major components: session lifecycle, context management, agentic loop, tool execution, hooks, subagents, and output. Click on any node to see detailed explanations and code examples.',
     userCommand: '(Reference diagram - not a specific command)',
     steps: algorithmOverviewSteps,
   },
@@ -50,11 +51,7 @@ export const scenarios: Scenario[] = [
         timestamp: 200,
         description: 'Loading CLAUDE.md and context',
         payload: {
-          sources: [
-            '~/.claude/CLAUDE.md',
-            '.claude/CLAUDE.md',
-            '.claude/rules/*.md',
-          ],
+          sources: ['~/.claude/CLAUDE.md', '.claude/CLAUDE.md', '.claude/rules/*.md'],
           tokensLoaded: 1250,
         },
       },
@@ -132,7 +129,8 @@ export const scenarios: Scenario[] = [
         },
         result: {
           success: true,
-          output: 'import React from "react";\n\nfunction App() {\n  return <div>Hello</div>;\n}\n\nexport default App;',
+          output:
+            'import React from "react";\n\nfunction App() {\n  return <div>Hello</div>;\n}\n\nexport default App;',
           tokensUsed: 45,
         },
       },
@@ -220,7 +218,8 @@ export const scenarios: Scenario[] = [
         timestamp: 400,
         description: 'Model inference - planning',
         payload: {
-          thinking: 'I need to: 1) Use Glob to find .ts files, 2) Count lines in each, 3) Read the largest',
+          thinking:
+            'I need to: 1) Use Glob to find .ts files, 2) Count lines in each, 3) Read the largest',
         },
       },
       {
@@ -360,7 +359,8 @@ export const scenarios: Scenario[] = [
         timestamp: 300,
         description: 'Model inference - deciding approach',
         payload: {
-          thinking: 'This is an exploratory question. I should delegate to an Explore subagent for thorough investigation.',
+          thinking:
+            'This is an exploratory question. I should delegate to an Explore subagent for thorough investigation.',
         },
       },
       {
@@ -465,7 +465,8 @@ export const scenarios: Scenario[] = [
         timestamp: 1500,
         description: 'Response sent to user',
         payload: {
-          response: 'Your codebase uses JWT-based authentication. Here\'s how it works:\n\n1. Login endpoint in src/auth/login.ts...',
+          response:
+            "Your codebase uses JWT-based authentication. Here's how it works:\n\n1. Login endpoint in src/auth/login.ts...",
         },
       },
     ],
@@ -499,7 +500,7 @@ export const scenarios: Scenario[] = [
         timestamp: 300,
         description: 'Model inference',
         payload: {
-          thinking: 'User wants to read .env file. I\'ll use Read tool.',
+          thinking: "User wants to read .env file. I'll use Read tool.",
         },
       },
       {
@@ -542,7 +543,8 @@ export const scenarios: Scenario[] = [
         timestamp: 700,
         description: 'Model handles denial',
         payload: {
-          thinking: 'The Read tool was blocked for .env. I should explain why I cannot access this file.',
+          thinking:
+            'The Read tool was blocked for .env. I should explain why I cannot access this file.',
         },
       },
       {
@@ -550,7 +552,8 @@ export const scenarios: Scenario[] = [
         timestamp: 800,
         description: 'Response sent to user',
         payload: {
-          response: 'I cannot read the .env file as it is blocked by a security rule. This file typically contains sensitive credentials and should not be exposed.',
+          response:
+            'I cannot read the .env file as it is blocked by a security rule. This file typically contains sensitive credentials and should not be exposed.',
         },
       },
     ],
@@ -590,7 +593,7 @@ export const scenarios: Scenario[] = [
         timestamp: 300,
         description: 'Model inference',
         payload: {
-          thinking: 'User wants to run npm install. I\'ll use Bash tool.',
+          thinking: "User wants to run npm install. I'll use Bash tool.",
         },
       },
       {

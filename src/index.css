@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
@@ -20,7 +20,9 @@
   --color-accent-hover: #79c0ff;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -62,13 +64,22 @@ body {
 
 /* Node animations */
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(35, 134, 54, 0.4); }
-  50% { box-shadow: 0 0 0 8px rgba(35, 134, 54, 0); }
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(35, 134, 54, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(35, 134, 54, 0);
+  }
 }
 
 @keyframes flow {
-  0% { stroke-dashoffset: 24; }
-  100% { stroke-dashoffset: 0; }
+  0% {
+    stroke-dashoffset: 24;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
 }
 
 .node-active {

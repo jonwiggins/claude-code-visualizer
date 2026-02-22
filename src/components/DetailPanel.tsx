@@ -20,9 +20,7 @@ export function DetailPanel() {
   if (!step) {
     return (
       <div className="bg-[#161b22] border border-[#30363d] rounded-lg p-4">
-        <div className="text-center text-sm text-[#8b949e]">
-          Node not yet executed
-        </div>
+        <div className="text-center text-sm text-[#8b949e]">Node not yet executed</div>
       </div>
     );
   }

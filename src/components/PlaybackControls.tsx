@@ -1,10 +1,4 @@
-import {
-  Play,
-  Pause,
-  SkipBack,
-  SkipForward,
-  RotateCcw,
-} from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward, RotateCcw } from 'lucide-react';
 import { useVisualizerStore } from '../store';
 import clsx from 'clsx';
 
@@ -76,7 +70,7 @@ export function PlaybackControls() {
             'p-3 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed',
             playbackState === 'playing'
               ? 'bg-[#f85149] hover:bg-[#f85149]/80'
-              : 'bg-[#238636] hover:bg-[#238636]/80'
+              : 'bg-[#238636] hover:bg-[#238636]/80',
           )}
           title={playbackState === 'playing' ? 'Pause' : 'Play'}
         >
@@ -104,7 +98,7 @@ export function PlaybackControls() {
               'px-2 py-1 text-xs rounded transition-colors',
               playbackSpeed === speed.value
                 ? 'bg-[#58a6ff] text-white'
-                : 'bg-[#30363d] hover:bg-[#3d444d]'
+                : 'bg-[#30363d] hover:bg-[#3d444d]',
             )}
           >
             {speed.label}

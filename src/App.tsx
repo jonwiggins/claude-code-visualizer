@@ -25,7 +25,7 @@ function App() {
                     'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors',
                     isActive
                       ? 'bg-[#1f6feb]/20 text-[#58a6ff]'
-                      : 'text-[#8b949e] hover:text-[#c9d1d9] hover:bg-[#1f2428]'
+                      : 'text-[#8b949e] hover:text-[#c9d1d9] hover:bg-[#1f2428]',
                   )
                 }
               >
@@ -39,7 +39,7 @@ function App() {
                     'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors',
                     isActive
                       ? 'bg-[#1f6feb]/20 text-[#58a6ff]'
-                      : 'text-[#8b949e] hover:text-[#c9d1d9] hover:bg-[#1f2428]'
+                      : 'text-[#8b949e] hover:text-[#c9d1d9] hover:bg-[#1f2428]',
                   )
                 }
               >

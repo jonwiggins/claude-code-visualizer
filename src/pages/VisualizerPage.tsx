@@ -37,7 +37,7 @@ export function VisualizerPage() {
         setRightSidebarWidth(Math.max(280, Math.min(600, newWidth)));
       }
     },
-    [resizingSide]
+    [resizingSide],
   );
 
   useEffect(() => {

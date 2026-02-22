@@ -1,13 +1,5 @@
 import { useState } from 'react';
-import {
-  Shield,
-  Zap,
-  Trash2,
-  ChevronDown,
-  ChevronRight,
-  Brain,
-  Gauge,
-} from 'lucide-react';
+import { Shield, Zap, Trash2, ChevronDown, ChevronRight, Brain, Gauge } from 'lucide-react';
 import { useVisualizerStore } from '../store';
 import type { PermissionMode, HookConfig } from '../types';
 import clsx from 'clsx';
@@ -75,7 +67,11 @@ export function SandboxPanel() {
             className="w-full p-3 flex items-center justify-between hover:bg-[#1f2428] transition-colors"
           >
             <span className="text-sm font-medium flex items-center gap-2">
-              {expandedSections.permissions ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+              {expandedSections.permissions ? (
+                <ChevronDown size={14} />
+              ) : (
+                <ChevronRight size={14} />
+              )}
               Permission Rules
             </span>
             <span className="text-xs text-[#8b949e]">
@@ -90,7 +86,7 @@ export function SandboxPanel() {
                   key={rule.id}
                   className={clsx(
                     'flex items-center gap-2 p-2 rounded text-xs',
-                    rule.enabled ? 'bg-[#0d1117]' : 'bg-[#0d1117]/50 opacity-50'
+                    rule.enabled ? 'bg-[#0d1117]' : 'bg-[#0d1117]/50 opacity-50',
                   )}
                 >
                   <input
@@ -104,7 +100,7 @@ export function SandboxPanel() {
                       'px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase',
                       rule.type === 'allow' && 'bg-green-500/20 text-green-400',
                       rule.type === 'deny' && 'bg-red-500/20 text-red-400',
-                      rule.type === 'ask' && 'bg-yellow-500/20 text-yellow-400'
+                      rule.type === 'ask' && 'bg-yellow-500/20 text-yellow-400',
                     )}
                   >
                     {rule.type}
@@ -145,7 +141,7 @@ export function SandboxPanel() {
                   key={hook.id}
                   className={clsx(
                     'p-2 rounded text-xs',
-                    hook.enabled ? 'bg-[#0d1117]' : 'bg-[#0d1117]/50 opacity-50'
+                    hook.enabled ? 'bg-[#0d1117]' : 'bg-[#0d1117]/50 opacity-50',
                   )}
                 >
                   <div className="flex items-center gap-2 mb-1">
@@ -204,7 +200,8 @@ export function SandboxPanel() {
                 <div className="flex justify-between text-xs mb-1">
                   <span className="text-[#8b949e]">Token Usage</span>
                   <span className="text-[#c9d1d9]">
-                    {sandbox.currentTokens.toLocaleString()} / {sandbox.contextLimit.toLocaleString()}
+                    {sandbox.currentTokens.toLocaleString()} /{' '}
+                    {sandbox.contextLimit.toLocaleString()}
                   </span>
                 </div>
                 <div className="h-2 bg-[#30363d] rounded-full overflow-hidden">
@@ -214,8 +211,8 @@ export function SandboxPanel() {
                       sandbox.currentTokens / sandbox.contextLimit > 0.9
                         ? 'bg-red-500'
                         : sandbox.currentTokens / sandbox.contextLimit > 0.7
-                        ? 'bg-yellow-500'
-                        : 'bg-green-500'
+                          ? 'bg-yellow-500'
+                          : 'bg-green-500',
                     )}
                     style={{
                       width: `${Math.min((sandbox.currentTokens / sandbox.contextLimit) * 100, 100)}%`,
@@ -234,13 +231,13 @@ export function SandboxPanel() {
                   onClick={toggleThinking}
                   className={clsx(
                     'relative w-10 h-5 rounded-full transition-colors',
-                    sandbox.thinkingEnabled ? 'bg-[#238636]' : 'bg-[#30363d]'
+                    sandbox.thinkingEnabled ? 'bg-[#238636]' : 'bg-[#30363d]',
                   )}
                 >
                   <span
                     className={clsx(
                       'absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform',
-                      sandbox.thinkingEnabled ? 'left-5' : 'left-0.5'
+                      sandbox.thinkingEnabled ? 'left-5' : 'left-0.5',
                     )}
                   />
                 </button>

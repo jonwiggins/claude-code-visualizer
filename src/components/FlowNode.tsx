@@ -47,7 +47,7 @@ const iconMap: Record<string, React.ElementType> = {
   response: MessageSquare,
   'tool-blocked': XCircle,
   'user-approval': Shield,
-  'compaction': FileText,
+  compaction: FileText,
   'context-check': FileText,
 };
 
@@ -71,14 +71,15 @@ const colorMap: Record<string, string> = {
   response: 'border-green-500 bg-green-500/10',
   'tool-blocked': 'border-red-500 bg-red-500/10',
   'user-approval': 'border-yellow-500 bg-yellow-500/10',
-  'compaction': 'border-purple-400 bg-purple-400/10',
+  compaction: 'border-purple-400 bg-purple-400/10',
   'context-check': 'border-yellow-400 bg-yellow-400/10',
 };
 
 function FlowNode({ data, selected }: FlowNodeProps) {
   const nodeType = data.nodeType.split('-').slice(0, 2).join('-');
   const Icon = iconMap[nodeType] || iconMap[data.nodeType.split('-')[0]] || Cog;
-  const colorClass = colorMap[nodeType] || colorMap[data.nodeType.split('-')[0]] || 'border-gray-500 bg-gray-500/10';
+  const colorClass =
+    colorMap[nodeType] || colorMap[data.nodeType.split('-')[0]] || 'border-gray-500 bg-gray-500/10';
 
   const statusClasses = {
     idle: 'opacity-50',
@@ -94,7 +95,7 @@ function FlowNode({ data, selected }: FlowNodeProps) {
         'px-4 py-3 rounded-lg border-2 min-w-[180px] max-w-[240px] transition-all duration-300',
         colorClass,
         statusClasses[data.status],
-        selected && 'ring-2 ring-[#58a6ff] ring-offset-2 ring-offset-[#0d1117]'
+        selected && 'ring-2 ring-[#58a6ff] ring-offset-2 ring-offset-[#0d1117]',
       )}
     >
       <Handle
@@ -108,7 +109,7 @@ function FlowNode({ data, selected }: FlowNodeProps) {
           className={clsx(
             data.status === 'active' && 'text-green-400',
             data.status === 'error' && 'text-red-400',
-            data.status === 'completed' && 'text-[#c9d1d9]'
+            data.status === 'completed' && 'text-[#c9d1d9]',
           )}
         />
         <span className="text-sm font-medium truncate">{data.label}</span>

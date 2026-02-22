@@ -34,7 +34,7 @@ interface LayoutOptions {
 function getLayoutedElements(
   nodes: Node[],
   edges: Edge[],
-  options: LayoutOptions = { direction: 'TB', nodesep: 60, ranksep: 80 }
+  options: LayoutOptions = { direction: 'TB', nodesep: 60, ranksep: 80 },
 ) {
   const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
 
@@ -53,7 +53,12 @@ function getLayoutedElements(
   });
 
   // Add edges to the graph (skip loop-back edges for layout calculation to reduce tangles)
-  const loopBackEdges = new Set(['response-user-input', 'hook-stop-model-inference', 'compaction-model-inference', 'context-check-model-inference']);
+  const loopBackEdges = new Set([
+    'response-user-input',
+    'hook-stop-model-inference',
+    'compaction-model-inference',
+    'context-check-model-inference',
+  ]);
 
   edges.forEach((edge) => {
     const edgeId = `${edge.source}-${edge.target}`;
@@ -82,7 +87,8 @@ function getLayoutedElements(
 }
 
 export function FlowCanvas() {
-  const { executionLog, currentStep, selectedNodeId, selectNode, currentScenario } = useVisualizerStore();
+  const { executionLog, currentStep, selectedNodeId, selectNode, currentScenario } =
+    useVisualizerStore();
 
   const isOverview = currentScenario?.id === 'algorithm-overview';
 
@@ -95,12 +101,7 @@ export function FlowCanvas() {
     const nodeMap = new Map<string, Node>();
 
     executionLog.forEach((step, index) => {
-      const status =
-        index < currentStep
-          ? 'completed'
-          : index === currentStep
-          ? 'active'
-          : 'idle';
+      const status = index < currentStep ? 'completed' : index === currentStep ? 'active' : 'idle';
 
       // For overview, get category from payload
       const category = (step.payload as Record<string, unknown>)?.category as string | undefined;
@@ -117,7 +118,9 @@ export function FlowCanvas() {
             status,
             description: isOverview
               ? (step.payload as Record<string, unknown>)?.summary
-              : (step.payload ? Object.keys(step.payload).join(', ') : undefined),
+              : step.payload
+                ? Object.keys(step.payload).join(', ')
+                : undefined,
           },
           selected: step.nodeId === selectedNodeId,
         });
@@ -141,7 +144,7 @@ export function FlowCanvas() {
 
     if (isOverview) {
       // Use the predefined overview edges for proper algorithm flow
-      const nodeIds = new Set(executionLog.map(s => s.nodeId));
+      const nodeIds = new Set(executionLog.map((s) => s.nodeId));
 
       overviewEdges.forEach((edge) => {
         // Only include edges where both nodes exist
@@ -161,7 +164,7 @@ export function FlowCanvas() {
               label: edge.label,
               labelStyle: {
                 fontSize: 9,
-                fill: isLoopBack ? '#484f58' : '#8b949e'
+                fill: isLoopBack ? '#484f58' : '#8b949e',
               },
               labelBgStyle: { fill: '#0d1117', fillOpacity: 0.9 },
               labelBgPadding: [4, 2] as [number, number],
@@ -214,7 +217,7 @@ export function FlowCanvas() {
     (_: React.MouseEvent, node: Node) => {
       selectNode(node.id);
     },
-    [selectNode]
+    [selectNode],
   );
 
   if (executionLog.length === 0) {
@@ -243,15 +246,8 @@ export function FlowCanvas() {
           type: 'smoothstep',
         }}
       >
-        <Background
-          variant={BackgroundVariant.Dots}
-          gap={20}
-          size={1}
-          color="#30363d"
-        />
-        <Controls
-          className="!bg-[#161b22] !border-[#30363d] !rounded-lg [&>button]:!bg-[#161b22] [&>button]:!border-[#30363d] [&>button]:!text-[#c9d1d9] [&>button:hover]:!bg-[#30363d]"
-        />
+        <Background variant={BackgroundVariant.Dots} gap={20} size={1} color="#30363d" />
+        <Controls className="!bg-[#161b22] !border-[#30363d] !rounded-lg [&>button]:!bg-[#161b22] [&>button]:!border-[#30363d] [&>button]:!text-[#c9d1d9] [&>button:hover]:!bg-[#30363d]" />
         <MiniMap
           nodeColor={(node) => {
             const status = (node.data as Record<string, unknown>).status;

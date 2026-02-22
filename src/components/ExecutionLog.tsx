@@ -27,7 +27,7 @@ export function ExecutionLog() {
                 onClick={() => selectNode(step.nodeId)}
                 className={clsx(
                   'w-full p-3 text-left hover:bg-[#1f2428] transition-colors',
-                  index === currentStep && 'bg-[#1f2428]'
+                  index === currentStep && 'bg-[#1f2428]',
                 )}
               >
                 <div className="flex items-center gap-2 mb-1">
@@ -37,7 +37,7 @@ export function ExecutionLog() {
                   <span
                     className={clsx(
                       'w-2 h-2 rounded-full',
-                      index === currentStep ? 'bg-green-500' : 'bg-[#30363d]'
+                      index === currentStep ? 'bg-green-500' : 'bg-[#30363d]',
                     )}
                   />
                 </div>
