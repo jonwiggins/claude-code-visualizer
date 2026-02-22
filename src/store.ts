@@ -282,7 +282,7 @@ export const useVisualizerStore = create<VisualizerState>((set, get) => ({
     // Update node status based on step
     const nodeUpdate: AlgorithmNode = {
       id: step.nodeId,
-      type: step.nodeId.split('-')[0] as any,
+      type: step.nodeId.split('-')[0] as AlgorithmNode['type'],
       label: step.description,
       description: step.description,
       status: 'active',

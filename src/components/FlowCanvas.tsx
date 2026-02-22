@@ -136,7 +136,7 @@ export function FlowCanvas() {
     });
 
     // Generate edges
-    let edgeList: Edge[] = [];
+    const edgeList: Edge[] = [];
     const edgeSet = new Set<string>();
 
     if (isOverview) {
@@ -254,7 +254,7 @@ export function FlowCanvas() {
         />
         <MiniMap
           nodeColor={(node) => {
-            const status = (node.data as any).status;
+            const status = (node.data as Record<string, unknown>).status;
             if (status === 'active') return '#238636';
             if (status === 'completed') return '#58a6ff';
             return '#30363d';

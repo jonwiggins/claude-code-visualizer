@@ -19,7 +19,7 @@ const NODE_WIDTH = 160;
 const NODE_HEIGHT = 50;
 
 // Custom node component for overview
-function OverviewFlowNode({ data, selected }: { data: any; selected: boolean }) {
+function OverviewFlowNode({ data, selected }: { data: Record<string, unknown>; selected: boolean }) {
   const colorClass = categoryColors[data.category as OverviewNode['category']] || 'border-gray-500 bg-gray-500/10';
 
   return (
