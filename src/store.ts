@@ -127,7 +127,7 @@ export const useVisualizerStore = create<VisualizerState>((set, get) => ({
   },
 
   play: () => {
-    const { playbackState, currentScenario, currentStep } = get();
+    const { playbackState, currentScenario } = get();
     if (!currentScenario) return;
     if (playbackState === 'finished') {
       get().reset();

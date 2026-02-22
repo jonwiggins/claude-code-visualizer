@@ -2,7 +2,7 @@
 
 An interactive educational webapp that visualizes how [Claude Code](https://github.com/anthropics/claude-code) works internally. Explore the agentic loop algorithm through interactive flowcharts and step-by-step scenario walkthroughs.
 
-![Claude Code Visualizer](https://img.shields.io/badge/React-18-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-blue)
+![Claude Code Visualizer](https://img.shields.io/badge/React-19-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-blue) ![License](https://img.shields.io/badge/License-MIT-green)
 
 ## Features
 
@@ -30,7 +30,7 @@ An interactive educational webapp that visualizes how [Claude Code](https://gith
 
 ## Tech Stack
 
-- **React 18** with TypeScript
+- **React 19** with TypeScript
 - **Vite** for fast development and building
 - **React Flow** (@xyflow/react) for interactive flowcharts
 - **Dagre** for automatic graph layout
@@ -51,7 +51,7 @@ An interactive educational webapp that visualizes how [Claude Code](https://gith
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/claude-code-visualizer.git
+git clone https://github.com/jonwiggins/claude-code-visualizer.git
 cd claude-code-visualizer
 
 # Install dependencies

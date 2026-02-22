@@ -5,12 +5,9 @@ import { SandboxPanel } from '../components/SandboxPanel';
 import { PlaybackControls } from '../components/PlaybackControls';
 import { ExecutionLog } from '../components/ExecutionLog';
 import { DetailPanel } from '../components/DetailPanel';
-import { useVisualizerStore } from '../store';
 import { GripVertical } from 'lucide-react';
 
 export function VisualizerPage() {
-  const { currentScenario } = useVisualizerStore();
-
   // Sidebar resizing state
   const [leftSidebarWidth, setLeftSidebarWidth] = useState(340);
   const [rightSidebarWidth, setRightSidebarWidth] = useState(320);

@@ -12,7 +12,7 @@ import Dagre from '@dagrejs/dagre';
 import '@xyflow/react/dist/style.css';
 import { useVisualizerStore } from '../store';
 import FlowNode from './FlowNode';
-import { overviewEdges, categoryColors } from '../algorithmOverview';
+import { overviewEdges } from '../algorithmOverview';
 
 const nodeTypes = {
   custom: FlowNode,
@@ -103,7 +103,7 @@ export function FlowCanvas() {
           : 'idle';
 
       // For overview, get category from payload
-      const category = step.payload?.category as string | undefined;
+      const category = (step.payload as Record<string, unknown>)?.category as string | undefined;
 
       // Only add node if not already present (handles duplicate node IDs)
       if (!nodeMap.has(step.nodeId)) {
@@ -116,7 +116,7 @@ export function FlowCanvas() {
             nodeType: category || step.nodeId,
             status,
             description: isOverview
-              ? step.payload?.summary
+              ? (step.payload as Record<string, unknown>)?.summary
               : (step.payload ? Object.keys(step.payload).join(', ') : undefined),
           },
           selected: step.nodeId === selectedNodeId,

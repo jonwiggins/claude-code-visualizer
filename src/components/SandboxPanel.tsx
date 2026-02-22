@@ -2,7 +2,6 @@ import { useState } from 'react';
 import {
   Shield,
   Zap,
-  Plus,
   Trash2,
   ChevronDown,
   ChevronRight,
