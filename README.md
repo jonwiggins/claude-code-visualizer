@@ -4,6 +4,8 @@ An interactive educational webapp that visualizes how [Claude Code](https://gith
 
 ![Claude Code Visualizer](https://img.shields.io/badge/React-19-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-blue) ![License](https://img.shields.io/badge/License-MIT-green)
 
+![Claude Code Algorithm Visualizer screenshot](public/og-image.png)
+
 ## Features
 
 ### Interactive Visualizer
