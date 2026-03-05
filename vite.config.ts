@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
+  base: '/claude-code-visualizer/',
   plugins: [react(), tailwindcss()],
   test: {
     globals: true,

@@ -5,10 +5,20 @@ import { SandboxPanel } from '../components/SandboxPanel';
 import { PlaybackControls } from '../components/PlaybackControls';
 import { ExecutionLog } from '../components/ExecutionLog';
 import { DetailPanel } from '../components/DetailPanel';
-import { GripVertical } from 'lucide-react';
+import { MobileDrawer } from '../components/MobileDrawer';
+import { GripVertical, List, SlidersHorizontal } from 'lucide-react';
+import { useIsMobile } from '../hooks/useMediaQuery';
+import { useScenarioFromUrl } from '../hooks/useScenarioFromUrl';
 
 export function VisualizerPage() {
-  // Sidebar resizing state
+  useScenarioFromUrl();
+  const isMobile = useIsMobile();
+
+  // Mobile drawer state
+  const [leftDrawerOpen, setLeftDrawerOpen] = useState(false);
+  const [rightDrawerOpen, setRightDrawerOpen] = useState(false);
+
+  // Sidebar resizing state (desktop only)
   const [leftSidebarWidth, setLeftSidebarWidth] = useState(340);
   const [rightSidebarWidth, setRightSidebarWidth] = useState(320);
   const [resizingSide, setResizingSide] = useState<'left' | 'right' | null>(null);
@@ -55,6 +65,55 @@ export function VisualizerPage() {
       document.body.style.userSelect = '';
     };
   }, [resizingSide, resize, stopResizing]);
+
+  if (isMobile) {
+    return (
+      <div className="flex-1 relative min-h-0">
+        {/* Full-width canvas */}
+        <div className="h-full p-2">
+          <FlowCanvas />
+        </div>
+
+        {/* Floating buttons */}
+        <button
+          onClick={() => setLeftDrawerOpen(true)}
+          className="absolute bottom-4 left-4 z-30 p-3 bg-[#1f6feb] hover:bg-[#388bfd] text-white rounded-full shadow-lg transition-colors"
+          aria-label="Open scenarios"
+        >
+          <List size={20} />
+        </button>
+        <button
+          onClick={() => setRightDrawerOpen(true)}
+          className="absolute bottom-4 right-4 z-30 p-3 bg-[#1f6feb] hover:bg-[#388bfd] text-white rounded-full shadow-lg transition-colors"
+          aria-label="Open controls"
+        >
+          <SlidersHorizontal size={20} />
+        </button>
+
+        {/* Drawers */}
+        <MobileDrawer
+          open={leftDrawerOpen}
+          onClose={() => setLeftDrawerOpen(false)}
+          side="left"
+          title="Scenarios"
+        >
+          <ScenarioPicker />
+          <SandboxPanel />
+        </MobileDrawer>
+
+        <MobileDrawer
+          open={rightDrawerOpen}
+          onClose={() => setRightDrawerOpen(false)}
+          side="right"
+          title="Controls"
+        >
+          <PlaybackControls />
+          <ExecutionLog />
+          <DetailPanel />
+        </MobileDrawer>
+      </div>
+    );
+  }
 
   return (
     <div className="flex-1 flex min-h-0">

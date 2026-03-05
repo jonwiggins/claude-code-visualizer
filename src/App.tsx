@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
+import { HashRouter, Routes, Route, NavLink } from 'react-router-dom';
 import { VisualizerPage } from './pages/VisualizerPage';
 import { LearnPage } from './pages/LearnPage';
 import { Github, Terminal, Play, BookOpen } from 'lucide-react';
@@ -6,14 +6,14 @@ import clsx from 'clsx';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="h-screen flex flex-col bg-[#0d1117] text-[#c9d1d9]">
         {/* Header */}
-        <header className="flex-none h-14 border-b border-[#30363d] flex items-center justify-between px-4">
-          <div className="flex items-center gap-6">
+        <header className="flex-none h-14 border-b border-[#30363d] flex items-center justify-between px-2 md:px-4">
+          <div className="flex items-center gap-3 md:gap-6">
             <div className="flex items-center gap-3">
               <Terminal size={24} className="text-[#58a6ff]" />
-              <h1 className="text-lg font-semibold">Claude Code Algorithm</h1>
+              <h1 className="text-lg font-semibold hidden md:block">Claude Code Algorithm</h1>
             </div>
 
             {/* Navigation Tabs */}
@@ -22,7 +22,7 @@ function App() {
                 to="/learn"
                 className={({ isActive }) =>
                   clsx(
-                    'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+                    'flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg text-sm font-medium transition-colors',
                     isActive
                       ? 'bg-[#1f6feb]/20 text-[#58a6ff]'
                       : 'text-[#8b949e] hover:text-[#c9d1d9] hover:bg-[#1f2428]',
@@ -30,13 +30,13 @@ function App() {
                 }
               >
                 <BookOpen size={16} />
-                Learn
+                <span className="hidden md:inline">Learn</span>
               </NavLink>
               <NavLink
                 to="/"
                 className={({ isActive }) =>
                   clsx(
-                    'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+                    'flex items-center gap-2 px-3 md:px-4 py-2 rounded-lg text-sm font-medium transition-colors',
                     isActive
                       ? 'bg-[#1f6feb]/20 text-[#58a6ff]'
                       : 'text-[#8b949e] hover:text-[#c9d1d9] hover:bg-[#1f2428]',
@@ -44,7 +44,7 @@ function App() {
                 }
               >
                 <Play size={16} />
-                Visualizer
+                <span className="hidden md:inline">Visualizer</span>
               </NavLink>
             </nav>
           </div>
@@ -66,13 +66,13 @@ function App() {
         </Routes>
 
         {/* Footer */}
-        <footer className="flex-none h-8 border-t border-[#30363d] flex items-center justify-center px-4">
+        <footer className="flex-none h-8 border-t border-[#30363d] hidden md:flex items-center justify-center px-4">
           <p className="text-xs text-[#8b949e]">
             Educational visualization of Claude Code's agentic loop algorithm
           </p>
         </footer>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
