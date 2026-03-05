@@ -19,8 +19,8 @@ const nodeTypes = {
 };
 
 // Node dimensions for layout calculation
-const NODE_WIDTH = 200;
-const NODE_HEIGHT = 60;
+const NODE_WIDTH = 180;
+const NODE_HEIGHT = 44;
 
 // Layout options for different modes
 interface LayoutOptions {
@@ -42,8 +42,8 @@ function getLayoutedElements(
     rankdir: options.direction,
     nodesep: options.nodesep,
     ranksep: options.ranksep,
-    marginx: 50,
-    marginy: 50,
+    marginx: 30,
+    marginy: 30,
     ranker: 'tight-tree', // Better for complex graphs
   });
 
@@ -207,8 +207,8 @@ export function FlowCanvas() {
 
     // Apply dagre layout with different settings for overview
     const layoutOptions: LayoutOptions = isOverview
-      ? { direction: 'TB', nodesep: 100, ranksep: 100, isOverview: true }
-      : { direction: 'TB', nodesep: 60, ranksep: 80 };
+      ? { direction: 'TB', nodesep: 60, ranksep: 60, isOverview: true }
+      : { direction: 'TB', nodesep: 40, ranksep: 50 };
 
     return getLayoutedElements(nodeArray, edgeList, layoutOptions);
   }, [executionLog, currentStep, selectedNodeId, isOverview]);

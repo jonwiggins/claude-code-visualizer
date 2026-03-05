@@ -92,7 +92,7 @@ function FlowNode({ data, selected }: FlowNodeProps) {
   return (
     <div
       className={clsx(
-        'px-4 py-3 rounded-lg border-2 min-w-[180px] max-w-[240px] transition-all duration-300',
+        'px-3 py-2 rounded-lg border-2 min-w-[160px] max-w-[220px] transition-all duration-300',
         colorClass,
         statusClasses[data.status],
         selected && 'ring-2 ring-[#58a6ff] ring-offset-2 ring-offset-[#0d1117]',
@@ -101,18 +101,19 @@ function FlowNode({ data, selected }: FlowNodeProps) {
       <Handle
         type="target"
         position={Position.Top}
-        className="!bg-[#30363d] !border-[#58a6ff] !w-3 !h-3"
+        className="!bg-[#30363d] !border-[#58a6ff] !w-2.5 !h-2.5"
       />
       <div className="flex items-center gap-2">
         <Icon
-          size={18}
+          size={16}
           className={clsx(
+            'flex-none',
             data.status === 'active' && 'text-green-400',
             data.status === 'error' && 'text-red-400',
             data.status === 'completed' && 'text-[#c9d1d9]',
           )}
         />
-        <span className="text-sm font-medium truncate">{data.label}</span>
+        <span className="text-[13px] font-medium leading-tight">{data.label}</span>
       </div>
       {data.description && data.status === 'active' && (
         <p className="text-xs text-[#8b949e] mt-1 truncate">{data.description}</p>
@@ -120,7 +121,7 @@ function FlowNode({ data, selected }: FlowNodeProps) {
       <Handle
         type="source"
         position={Position.Bottom}
-        className="!bg-[#30363d] !border-[#58a6ff] !w-3 !h-3"
+        className="!bg-[#30363d] !border-[#58a6ff] !w-2.5 !h-2.5"
       />
     </div>
   );

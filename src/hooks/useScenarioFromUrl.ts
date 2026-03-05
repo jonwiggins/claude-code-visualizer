@@ -8,10 +8,14 @@ export function useScenarioFromUrl() {
   const selectScenario = useVisualizerStore((s) => s.selectScenario);
   const scenarios = useVisualizerStore((s) => s.scenarios);
 
-  // On mount: read scenario from URL
+  // On mount: read scenario from URL (skip if already selected)
   useEffect(() => {
     const scenarioId = searchParams.get('scenario');
-    if (scenarioId && scenarios.some((s) => s.id === scenarioId)) {
+    if (
+      scenarioId &&
+      scenarioId !== currentScenario?.id &&
+      scenarios.some((s) => s.id === scenarioId)
+    ) {
       selectScenario(scenarioId);
     }
     // Only run on mount

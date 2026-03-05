@@ -91,13 +91,16 @@ const defaultSandbox: SandboxConfig = {
 
 const initialNodes = new Map<string, AlgorithmNode>();
 
+// Default to algorithm-overview with all steps shown
+const defaultScenario = scenarios.find((s) => s.id === 'algorithm-overview')!;
+
 export const useVisualizerStore = create<VisualizerState>((set, get) => ({
-  currentScenario: null,
+  currentScenario: defaultScenario,
   scenarios,
   nodes: initialNodes,
-  currentStep: -1,
-  executionLog: [],
-  playbackState: 'idle',
+  currentStep: defaultScenario.steps.length - 1,
+  executionLog: defaultScenario.steps,
+  playbackState: 'finished' as PlaybackState,
   playbackSpeed: 1000,
   sandbox: defaultSandbox,
   selectedNodeId: null,
@@ -115,12 +118,15 @@ export const useVisualizerStore = create<VisualizerState>((set, get) => ({
       ...scenario.sandboxOverrides,
     };
 
+    // Algorithm overview starts fully expanded
+    const isOverview = scenarioId === 'algorithm-overview';
+
     set({
       currentScenario: scenario,
       nodes,
-      currentStep: -1,
-      executionLog: [],
-      playbackState: 'idle',
+      currentStep: isOverview ? scenario.steps.length - 1 : -1,
+      executionLog: isOverview ? scenario.steps : [],
+      playbackState: isOverview ? 'finished' : 'idle',
       sandbox,
       selectedNodeId: null,
     });
